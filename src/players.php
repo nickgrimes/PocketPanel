@@ -1,4 +1,15 @@
 <? require_once($_SERVER['DOCUMENT_ROOT']."/navbar.php"); ?>
+<? require_once($_SERVER['DOCUMENT_ROOT']."/MinecraftUtils.php"); ?>
+
+<?
+
+$MinecratUtils = new MinecraftUtils();
+if(!($MinecraftUtils instanceof MinecraftUtils))
+{
+	echo "Error Detected";
+	exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,6 +48,22 @@
   <?
   
   function displayTable($number, $username, $IP)
+  {
+  	echo "<tr>
+          <td>$number</td>
+          <td>$username</td>
+          <td>$IP</td>
+          <td>
+              <a href='#'><i class='icon-pencil'></i></a>
+              <a href='#'><i class='icon-remove'></i></a>
+          </td>
+        </tr>";
+   }
+  
+  
+  
+  
+  ?>
   </head>
 
   <body>
@@ -79,72 +106,17 @@
         <tr>
           <th>#</th>
           <th>Username</th>
-          <th>Online Time</th>
           <th>IP</th>
           <th style="width: 36px;"></th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Tompson</td>
-          <td>the_mark7</td>
-          <td>
-              <a href="user.html"><i class="icon-pencil"></i></a>
-              <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Ashley</td>
-          <td>Jacobs</td>
-          <td>ash11927</td>
-          <td>
-              <a href="user.html"><i class="icon-pencil"></i></a>
-              <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Audrey</td>
-          <td>Ann</td>
-          <td>audann84</td>
-          <td>
-              <a href="user.html"><i class="icon-pencil"></i></a>
-              <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>John</td>
-          <td>Robinson</td>
-          <td>jr5527</td>
-          <td>
-              <a href="user.html"><i class="icon-pencil"></i></a>
-              <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>Aaron</td>
-          <td>Butler</td>
-          <td>aaron_butler</td>
-          <td>
-              <a href="user.html"><i class="icon-pencil"></i></a>
-              <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td>Chris</td>
-          <td>Albert</td>
-          <td>cab79</td>
-          <td>
-              <a href="user.html"><i class="icon-pencil"></i></a>
-              <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
-          </td>
-        </tr>
+        <?
+        foreach($MinecraftUtils->getInfo('Players') as $p)
+        {
+        	displayTable(1, $p, "false");
+        }
+        ?>
       </tbody>
     </table>
 </div>
