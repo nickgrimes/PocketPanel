@@ -3,10 +3,10 @@
 
 <?
 
-$MinecratUtils = new MinecraftUtils();
+$MinecraftUtils = new MinecraftUtils();
 if(!($MinecraftUtils instanceof MinecraftUtils))
 {
-	echo "Error Detected";
+	echo $MinecraftUtils;
 	exit();
 }
 ?>
@@ -29,6 +29,9 @@ if(!($MinecraftUtils instanceof MinecraftUtils))
         background-attachment: fixed;
 	background-repeat:no-repeat;
       }
+      html {
+       overflow-y: scroll;
+}
     </style>
     <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 
@@ -73,7 +76,7 @@ if(!($MinecraftUtils instanceof MinecraftUtils))
             	<div class="row-fluid">
                 	<div class="span12">
                     	<div class="span6">
-                        	<h1 class="muted">PocketPanel</h1>
+                        	<h1>PocketPanel</h1>
                         </div>
                         <div class="span4 offset2" style="margin-top:15px;">
                           <button type="button" class="btn pull-right">Sign In</button>							
@@ -95,7 +98,6 @@ if(!($MinecraftUtils instanceof MinecraftUtils))
      
      
      
-     
      <div class="btn-toolbar">
     <button class="btn btn-primary">New User</button>
     <button class="btn">Refresh</button>
@@ -112,9 +114,12 @@ if(!($MinecraftUtils instanceof MinecraftUtils))
       </thead>
       <tbody>
         <?
-        foreach($MinecraftUtils->getInfo('Players') as $p)
+        $Players = $MinecraftUtils->getPlayers();
+        $re = 0;
+        foreach($Players as $p)
         {
-        	displayTable(1, $p, "false");
+        	$re = $re + 1;
+        	displayTable($re, $p, "false");
         }
         ?>
       </tbody>

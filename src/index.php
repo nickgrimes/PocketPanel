@@ -1,4 +1,15 @@
 <? require_once($_SERVER['DOCUMENT_ROOT']."/navbar.php"); ?>
+<? require_once($_SERVER['DOCUMENT_ROOT']."/MinecraftUtils.php"); ?>
+
+<?
+
+$MinecraftUtils = new MinecraftUtils();
+if(!($MinecraftUtils instanceof MinecraftUtils))
+{
+	echo $MinecraftUtils;
+	exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,6 +29,9 @@
         background-attachment: fixed;
 	background-repeat:no-repeat;
       }
+      html {
+       overflow-y: scroll;
+	}
     </style>
     <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 
@@ -41,7 +55,7 @@
             	<div class="row-fluid">
                 	<div class="span12">
                     	<div class="span6">
-                        	<h1 class="muted">PocketPanel</h1>
+                        	<h1>PocketPanel</h1>
                         </div>
                         <div class="span4 offset2" style="margin-top:15px;">
                           <button type="button" class="btn pull-right">Sign In</button>							
@@ -76,12 +90,12 @@
 	<div class='row-fluid'>
 		<div class='span4 well'>
 		<h4>Server Status</h4>
-			CPU:
-			<div class="progress progress-success">
-		  		<div class="bar" style="width: 80%"></div>
+			TPS:
+			<div class="progress progress-striped progress-<? echo $MinecraftUtils->parseScale('tps', $MinecraftUtils->status()['TPS']); ?>">
+		  		<div class="bar" style="width: <? echo $MinecraftUtils->status()['TPS']/20*100 ?>%"></div>
 			</div>
 			RAM:
-			<div class="progress progress-warning">
+			<div class="progress progress-striped progress-warning">
 		  		<div class="bar" style="width: 40%"></div>
 			</div>
 		</div>
